@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="https://kampusmerdeka.kemdikbud.go.id/static/media/logo-pendidikan.92aef756.webp" alt="" class="me-2">
@@ -40,6 +40,9 @@
                     <!-- Right Side Of Navbar -->
                    <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                       <a href="{{ route('register-mbkm') }}" class="nav-link">Pendaftaran MBKM</a>
+                      </li>
+                    <li class="nav-item">
                         <button type="button" class="btn btn-light rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="bi bi-person me-2 " ></i>Masuk</button>
                       </li>
@@ -47,6 +50,7 @@
                 </div>
             </div>
         </nav>
+
 
         <main class="py-4">
             @yield('content')
@@ -87,16 +91,11 @@
                     .
                     <div class="row mt-1 text-center" >
                         <span> Belum Punya Akun ? <a href="{{ route('register') }}"  class="custom-link">Daftar</a></span>
-                       
                     </div>
                 </div>
-               
-              
             </div>
           </div>
         </div>
       </div>
-      
-      
 </body>
 </html>
