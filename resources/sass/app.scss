@@ -1,0 +1,32 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Boostrap icons
+@import '~bootstrap-icons/font/bootstrap-icons';
+
+.btn-orange{
+    background-color: #F46850;
+    color: white;
+    border:none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-orange:hover{
+    background-color: #F79281;
+    transition: 0.9s auto;
+}
+
+.custom-link{
+    color: #1A93CE;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    background-color: transparent;
+}
