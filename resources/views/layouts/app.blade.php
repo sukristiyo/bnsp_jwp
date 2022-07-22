@@ -39,13 +39,35 @@
 
                     <!-- Right Side Of Navbar -->
                    <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                       <a href="{{ route('register-mbkm') }}" class="nav-link">Pendaftaran MBKM</a>
-                      </li>
+                    @auth
+                      @role('admin')
+                        <li class="nav-item">
+                            <a href="{{ route('registration-list') }}" class="nav-link">Pendaftar</a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a href="{{ route('submit-file') }}" class="nav-link">Pengumpulan Berkas</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="{{ route('register-mbkm') }}" class="nav-link">Pendaftaran MBKM</a>
+                        </li>
+                        @endrole
+                       
+                     <li class="nav-item">
+                        <form action="{{ route("logout") }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-light rounded-pill" >
+                               Logout</button>
+                        </form>
+                    </li>
+                    @endauth
+
+                    @guest
                     <li class="nav-item">
                         <button type="button" class="btn btn-light rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="bi bi-person me-2 " ></i>Masuk</button>
-                      </li>
+                    </li>
+                    @endguest
                    </ul>
                 </div>
             </div>
@@ -56,6 +78,10 @@
             @yield('content')
         </main>
     </div>
+
+    
+    <form method="POST" action="{{ route('login') }}">
+    @csrf
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -72,21 +98,19 @@
                 </div>
             </div>
             <div class="modal-body">
-              <form>
                 <div class="mb-3">
                   <label for="recipient-name" class="col-form-label">Alamat email</label>
-                  <input type="text" class="form-control" id="recipient-name">
+                  <input type="text" name="email" class="form-control" id="recipient-name">
                 </div>
                 <div class="mb-3">
                   <label for="message-text" class="col-form-label">Kata Sandi</label>
-                  <input type="password" class="form-control" id="recipient-name" >
+                  <input type="password" name="password"  class="form-control" id="recipient-name" >
                 </div>
-              </form>
             </div>
             <div class="modal-footer">
                 <div class="container">
                     <div class="row px-5">
-                        <button type="button" class="btn-orange">Masuk</button>
+                        <button type="submit" class="btn-orange">Masuk</button>
                     </div>
                     .
                     <div class="row mt-1 text-center" >
@@ -97,5 +121,10 @@
           </div>
         </div>
       </div>
+      </form>
+      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+      @stack('script')
 </body>
 </html>
