@@ -2,33 +2,43 @@
 
 @section('content')
 
-<form action="{{ route('save-register') }}" method="post">
-@csrf
-<div class="container">
+<div class="container mb-5">
     <div class="row justify-content-center">
+        <div class="col-6">
+            <a href="{{ route("admin.registration-list") }}" class="btn btn-success">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
         <div class="col-6">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h4 class="fw-bold my-3">Detail Data</h4>
+                    <h4 class="fw-bold my-3">Data Pendaftaran MBKM</h4>
                     <div class="btn-group align-self-center">
-                        <form action="
-                        ">
-                            <button class="btn btn-success">
-                                Terima
-                            </button>
-                            <button class="btn btn-danger">
-                                Tolak
-                            </button>
-                        </form>
+                        @if ($mbkm->status == "pending")
+                            <form method="POST" action="{{ route("admin.accept-registration",$mbkm->id) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-success">
+                                    Terima
+                                </button>
+                            </form>
+                            <form  method="POST" action="{{ route("admin.reject-registration",$mbkm->id) }}">
+                                @csrf
+                                <button class="btn btn-danger">
+                                    Tolak
+                                </button>
+                            </form>
+                        @endif
+                        @if ($mbkm->status == "accepted")
+                            <a href="{{ route("admin.registration-file",$mbkm->id) }}" class="btn btn-primary">
+                                <i class="bi bi-file-earmark-text"></i> Berkas Pelaksanaan
+                            </a>
+                        @endif
                     </div>
                   </div>
                 <div class="card-body px-5">
-                  <div class="row">
-                    <div class="col my-1">
-                        <h4>Data Pendaftaran MBKM</h4>
-                    </div>
-                  </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold">Nama</label>
@@ -36,7 +46,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold">NIM</label>
@@ -44,7 +54,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold">Jurusan</label>
@@ -52,7 +62,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold">Angkatan</label>
@@ -60,7 +70,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold">Program yang di pilih</label>
@@ -68,7 +78,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold">Jenis MBKM</label>
@@ -76,7 +86,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold">Tempat Kegiatan</label>
@@ -84,17 +94,31 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group d-flex flex-column">
                             <label class="fw-bold">Bukti Penerimaan</label>
-                            <button class="btn btn-primary align-self-start btn-sm">
-                                Lihat Berkas
-                            </button>
+                            <a href="{{ asset(Storage::url($mbkm->bukti_penerimaan)) }}" class="btn btn-primary align-self-start btn-sm">
+                                <i class="bi bi-download"></i> Download
+                            </a>                        
                         </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
+                  <div class="row mt-4">
+                    <div class="col">
+                        <div class="row">
+                          <label class="fw-bold">Mata kuliah yang di klaim :</label>
+                        </div>
+                        <div class="row mt-2">
+                            <ul class="list-group">
+                                @foreach ($mbkm->courses as $item)
+                                    <li class="list-group-item">{{ $item->name }}</li>
+                                @endforeach
+                              </ul>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row mt-4">
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold">Semester Claim</label>
@@ -107,6 +131,15 @@
         </div>
     </div>
 </div>
-</form>
-
 @endsection
+
+{{-- @push('script')
+    <script>
+        $(function(){
+            let buttonAccept = $("button[name='buttonAccept']");
+            let buttonAccept = $("button[name='buttonAccept']");
+
+            
+        });
+    </script>
+@endpush --}}

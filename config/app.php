@@ -167,6 +167,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Davcpas1234\LaravelPdfViewer\LaravelPdfViewerServiceProvider::class,
 
         /*
          * Application Service Providers...

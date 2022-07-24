@@ -10,4 +10,14 @@ class Mbkm extends Model
     use HasFactory;
 
     protected $table = "mbkm";
+
+    public function registration_file()
+    {
+        return $this->hasOne(RegistrationFile::class, "mbkm_id");
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, "mbkm_id");
+    }
 }

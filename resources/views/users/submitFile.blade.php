@@ -2,7 +2,10 @@
 
 @section('content')
 
-<div class="container">
+<form action="{{ route("user.save-submit-file",$id) }}" method="POST" enctype="multipart/form-data">
+@csrf
+<div class="container mb-5">
+    @if (!$isSubmited)
     <div class="row justify-content-center">
         <div class="col-6">
             <div class="card">
@@ -17,40 +20,71 @@
                   </div> 
                     <div class="col-12 mb-3">
                         <label  class="form-label">Sertifikat kegiatan</label>
-                        <input class="form-control" type="file" multiple>
+                        <input class="form-control mb-1 @error('sertifikat_kegiatan') is-invalid @enderror" type="file" name="sertifikat_kegiatan" multiple>
+                        @error('sertifikat_kegiatan')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-12 mb-3">
                         <label  class="form-label">Laporan kegiatan</label>
-                        <input class="form-control" type="file" multiple>
+                        <input class="form-control mb-1 @error('laporan_kegiatan') is-invalid @enderror" type="file" name="laporan_kegiatan" multiple>
+                        @error('laporan_kegiatan')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-12 mb-3">
                         <label  class="form-label">Luaran kegiatan</label>
-                        <input class="form-control" type="file" multiple>
+                        <input class="form-control mb-1 @error('luaran_kegiatan') is-invalid @enderror" type="file" name="luaran_kegiatan" multiple>
+                        @error('luaran_kegiatan')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-12 mb-3">
                         <label  class="form-label">Tanggal Mulai</label>
-                        <input class="form-control" type="date" multiple>
+                        <input class="form-control mb-1 @error('tanggal_mulai_kegiatan') is-invalid @enderror" type="date" name="tanggal_mulai_kegiatan" multiple>
+                        @error('tanggal_mulai_kegiatan')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-12 mb-3">
                         <label  class="form-label">Tanggal Selesai</label>
-                        <input class="form-control" type="date" multiple>
+                        <input class="form-control mb-1 @error('tanggal_selesai_kegiatan') is-invalid @enderror" type="date" name="tanggal_selesai_kegiatan" multiple>
+                        @error('tanggal_selesai_kegiatan')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-12 mb-3">
                         <label  class="form-label">Dokumentasi</label>
-                        <input class="form-control" type="file" multiple>
+                        <input class="form-control mb-1 @error('dokumentasi') is-invalid @enderror" type="file" name="dokumentasi" multiple>
+                        @error('dokumentasi')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                   </div>
                 </div>
                 <div class="card-footer">
-                    <div class="container">
+                    <div class="container mb-5">
                         <div class="row px-5 my-2">
-                            <button type="button" class="btn-orange">Submit</button>
+                            <button type="submit" class="btn-orange">Submit</button>
                         </div>
                     </div>
                 </div>
               </div>
         </div>
     </div>
+    @else
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Data sudah di submit</h4>
+                    <p>Berkas mbkm anda sudah di kumpulkan!</p>
+                    {{-- <hr> --}}
+                    {{-- <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p> --}}
+                  </div>
+            </div>
+        </div>
+    @endif
+  
 </div>
-
+</form>
 @endsection

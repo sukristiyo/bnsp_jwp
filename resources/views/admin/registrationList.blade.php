@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="container">
+<div class="container mb-5">
     <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-8">
             <div class="card">
                 <div class="card-header">
                     <h4 class="fw-bold my-3">List Data Pendaftar</h4>
@@ -17,6 +17,8 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>NIM</th>
+                                        <th>Program</th>
+                                        <th>Jenis</th>
                                         <th>Jurusan</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -27,6 +29,8 @@
                                         <tr>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->nim }}</td>
+                                            <td>{{ $item->program }}</td>
+                                            <td>{{ $item->jenis_mbkm }}</td>
                                             <td>{{ $item->prodi }}</td>
                                             <td>
                                                 @switch($item->status)
@@ -34,7 +38,7 @@
                                                         <span class="badge bg-success">Disetujui</span>
                                                         @break
                                                     @case("pending")
-                                                    <span class="badge bg-secondary">Pending</span>
+                                                        <span class="badge bg-secondary">Pending</span>
 
                                                         @break
                                                     @case("rejected")
@@ -44,7 +48,7 @@
                                                 @endswitch
                                             </td>
                                             <td>
-                                                <a href="{{ route("registration-detail",$item->id) }}" class="btn btn-secondary">
+                                                <a href="{{ route("admin.registration-detail",$item->id) }}" class="btn btn-secondary">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
                                             </td>

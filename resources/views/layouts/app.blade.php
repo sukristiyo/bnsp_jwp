@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('style')
 </head>
 <body>
     <div id="app">
@@ -41,25 +42,28 @@
                    <ul class="navbar-nav ms-auto">
                     @auth
                       @role('admin')
-                        <li class="nav-item">
-                            <a href="{{ route('registration-list') }}" class="nav-link">Pendaftar</a>
+                        <li class="nav-item me-4">
+                            <a href="{{ route('admin.registration-list') }}" class="nav-link">Pendaftar</a>
                         </li>
                         @else
-                        <li class="nav-item">
-                            <a href="{{ route('submit-file') }}" class="nav-link">Pengumpulan Berkas</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="{{ route('register-mbkm') }}" class="nav-link">Pendaftaran MBKM</a>
+                         <li class="nav-item me-4">
+                            <a href="{{ route('user.register-mbkm') }}" class="nav-link">Pendaftaran MBKM</a>
                         </li>
+                        <li class="nav-item me-4">
+                            <a href="{{ route('user.index-register-mbkm') }}" class="nav-link">Program</a>
+                         </li>
                         @endrole
                        
-                     <li class="nav-item">
+                     <li class="nav-item me-4">
                         <form action="{{ route("logout") }}" method="post">
                             @csrf
                             <button type="submit" class="btn btn-light rounded-pill" >
                                Logout</button>
                         </form>
                     </li>
+                    <span class="navbar-text">
+                       Selamat datang,{{ auth()->user()->name }}!
+                      </span>
                     @endauth
 
                     @guest
@@ -77,6 +81,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <div class="footer bg-dark text-white text-center fixed-bottom py-3">
+            <span class="align-self-center">Copyright© 2022 W2SDEV</span>
+        </div>
     </div>
 
     
@@ -86,7 +94,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header"> 
-                <div class="container">
+                <div class="container mb-5">
                     <div class="row">
                         <div class="col-7 d-flex justify-content-end">
                             <h5 class="modal-title fw-bold" id="exampleModalLabel" >Masuk</h5>
@@ -108,7 +116,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="container">
+                <div class="container mb-5">
                     <div class="row px-5">
                         <button type="submit" class="btn-orange">Masuk</button>
                     </div>
@@ -122,6 +130,7 @@
         </div>
       </div>
       </form>
+      @include('sweetalert::alert')
       <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
       <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
